@@ -27,13 +27,16 @@ namespace ElevenNote.WebApiV2
             var noteService = new NoteService(userId);
             return noteService;
         }
+        /*This is the duplicate since added other Get() above
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
-
+        */
+        
         // GET api/<controller>/5
+
         public string Get(int id)
         {
             return "value";
