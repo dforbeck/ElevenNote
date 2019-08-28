@@ -10,17 +10,15 @@ using System.Web.Http;
 
 namespace ElevenNote.WebApiV2.Controllers
 {
-    [Authorize]
     public class NoteController : ApiController
     {
-        //Uses Service Method
         public IHttpActionResult GetAll()
         {
             NoteService noteService = CreateNoteService();
             var notes = noteService.GetNotes();
             return Ok(notes);
         }
-        
+
         public IHttpActionResult Get(int id)
         {
             NoteService noteService = CreateNoteService();
@@ -34,6 +32,7 @@ namespace ElevenNote.WebApiV2.Controllers
                 return BadRequest(ModelState);
 
             var service = CreateNoteService();
+
             if (!service.CreateNote(note))
                 return InternalServerError();
 
@@ -62,44 +61,11 @@ namespace ElevenNote.WebApiV2.Controllers
 
             return Ok();
         }
-
-        //HELPER service method
         private NoteService CreateNoteService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var noteService = new NoteService(userId);
             return noteService;
         }
-
-        
-        /// //////////////////////////////
-        /*These are duplicates that came in 
-        // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-        
-        // GET api/<controller>/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
-        */
     }
 }

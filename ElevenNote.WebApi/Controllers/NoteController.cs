@@ -10,7 +10,6 @@ using System.Web.Http;
 
 namespace ElevenNote.WebApi.Controllers
 {
-    [Authorize]
     public class NoteController : ApiController
     {
         public IHttpActionResult GetAll()
@@ -37,7 +36,7 @@ namespace ElevenNote.WebApi.Controllers
             if (!service.CreateNote(note))
                 return InternalServerError();
 
-            return Ok();
+            return Ok(note);
         }
 
         public IHttpActionResult Put(NoteEdit note)
